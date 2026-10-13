@@ -1,0 +1,94 @@
+// DBML hasil konversi dari diagram ERD Draw.io.
+
+Table lowongan {
+  id_lowongan int [pk]
+  posisi varchar(100)
+  deskripsi text
+  persyaratan text
+  tanggal_buka date
+  status varchar(20)
+}
+
+Table lamaran {
+  id_lamaran int [pk]
+  id_pelamar int [note: 'FK ditandai pada diagram sumber']
+  id_lowongan int [note: 'FK ditandai pada diagram sumber']
+  tanggal_lamaran date
+  status varchar(20)
+}
+
+Table pelamar {
+  id_pelamar int [pk]
+  nama varchar(100)
+  email varchar(100)
+  no_hp varchar(15)
+  cv varchar(255)
+}
+
+Table training {
+  id_training int [pk]
+  id_pelamar int [note: 'FK ditandai pada diagram sumber']
+  tanggal_training date
+  hasil varchar(20)
+}
+
+Table seleksi {
+  id_seleksi int [pk]
+  id_lamaran int [note: 'FK ditandai pada diagram sumber']
+  tanggal_seleksi date
+  hasil varchar(20)
+}
+
+Table evaluasi {
+  id_evaluasi int [pk]
+  id_karyawan int [note: 'FK ditandai pada diagram sumber']
+  tanggal_evaluasi date
+  hasil text
+}
+
+Table promosi {
+  id_promosi int [pk]
+  id_karyawan int [note: 'FK ditandai pada diagram sumber']
+  jabatan_lama varchar(100)
+  jabatan_baru varchar(100)
+  tanggal_promosi date
+}
+
+Table gaji {
+  id_gaji int [pk]
+  id_karyawan int [note: 'FK ditandai pada diagram sumber']
+  nominal decimal
+  periode varchar
+}
+
+Table cuti {
+  id_cuti int [pk]
+  id_karyawan int [note: 'FK ditandai pada diagram sumber']
+  jenis_cuti varchar(30)
+  tanggal_mulai date
+  tanggal_selesai date
+  alasan text
+  status text
+  id_manager int [note: 'FK ditandai pada diagram sumber']
+  tanggal_keputusan date
+}
+
+Table karyawan {
+  id_karyawan int [pk]
+  id_pelamar int [note: 'FK ditandai pada diagram sumber']
+  nama varchar(100)
+  jabatan varchar(100)
+  tanggal_masuk date
+}
+
+// Relasi berdasarkan kolom FK pada diagram.
+Ref: lamaran.id_pelamar > pelamar.id_pelamar
+Ref: lamaran.id_lowongan > lowongan.id_lowongan
+Ref: training.id_pelamar > pelamar.id_pelamar
+Ref: seleksi.id_lamaran > lamaran.id_lamaran
+Ref: evaluasi.id_karyawan > karyawan.id_karyawan
+Ref: promosi.id_karyawan > karyawan.id_karyawan
+Ref: gaji.id_karyawan > karyawan.id_karyawan
+Ref: cuti.id_karyawan > karyawan.id_karyawan
+Ref: karyawan.id_pelamar > pelamar.id_pelamar
+// Catatan: cuti.id_manager ditandai sebagai FK pada diagram, tetapi tabel manager tidak terlihat.
