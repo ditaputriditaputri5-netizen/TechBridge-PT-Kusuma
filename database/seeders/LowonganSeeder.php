@@ -10,16 +10,17 @@ class LowonganSeeder extends Seeder
 {
     public function run(): void
     {
+        $targetCount = 500;
         $existingCount = Lowongan::query()->count();
 
-        if ($existingCount >= 250) {
+        if ($existingCount >= $targetCount) {
             return;
         }
 
         $firstId = (int) Lowongan::query()->max('id_lowongan') + 1;
 
         Lowongan::factory()
-            ->count(250 - $existingCount)
+            ->count($targetCount - $existingCount)
             ->sequence(fn (Sequence $sequence) => [
                 'id_lowongan' => $firstId + $sequence->index,
             ])

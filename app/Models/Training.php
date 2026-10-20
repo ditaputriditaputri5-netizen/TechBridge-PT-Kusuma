@@ -9,12 +9,21 @@ class Training extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_training';
+
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $keyType = 'int';
+
     // @dbml-sync:table-property
     protected $table = 'training';
     // @enddbml-sync:table-property
 
     // @dbml-sync:fillable
     protected $fillable = [
+        'id_training',
         'id_pelamar',
 		'tanggal_training',
 		'hasil'

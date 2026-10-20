@@ -9,12 +9,21 @@ class Cuti extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_cuti';
+
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $keyType = 'int';
+
     // @dbml-sync:table-property
     protected $table = 'cuti';
     // @enddbml-sync:table-property
 
     // @dbml-sync:fillable
     protected $fillable = [
+        'id_cuti',
         'id_karyawan',
 		'jenis_cuti',
 		'tanggal_mulai',

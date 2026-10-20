@@ -15,6 +15,7 @@ class LowonganFactory extends Factory
     public function definition(): array
     {
         return [
+            'id_lowongan' => fake()->unique()->numberBetween(1, 2147483647),
             'posisi' => fake()->randomElement([
                 'Staff Administrasi',
                 'Staff HRD',

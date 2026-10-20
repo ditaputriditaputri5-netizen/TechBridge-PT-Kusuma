@@ -9,12 +9,21 @@ class Pelamar extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_pelamar';
+
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $keyType = 'int';
+
     // @dbml-sync:table-property
     protected $table = 'pelamar';
     // @enddbml-sync:table-property
 
     // @dbml-sync:fillable
     protected $fillable = [
+        'id_pelamar',
         'nama',
 		'email',
 		'no_hp',

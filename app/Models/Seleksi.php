@@ -9,12 +9,21 @@ class Seleksi extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_seleksi';
+
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $keyType = 'int';
+
     // @dbml-sync:table-property
     protected $table = 'seleksi';
     // @enddbml-sync:table-property
 
     // @dbml-sync:fillable
     protected $fillable = [
+        'id_seleksi',
         'id_lamaran',
 		'tanggal_seleksi',
 		'hasil'
