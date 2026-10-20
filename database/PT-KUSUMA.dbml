@@ -1,7 +1,7 @@
 // DBML hasil konversi dari diagram ERD Draw.io.
 
 Table lowongan {
-  id_lowongan int [pk]
+  id_lowongan int [pk, not null]
   posisi varchar(100)
   deskripsi text
   persyaratan text
@@ -9,45 +9,53 @@ Table lowongan {
   status varchar(20)
 }
 
-Table lamaran {
-  id_lamaran int [pk]
-  id_pelamar int [note: 'FK ditandai pada diagram sumber']
-  id_lowongan int [note: 'FK ditandai pada diagram sumber']
-  tanggal_lamaran date
-  status varchar(20)
-}
-
 Table pelamar {
-  id_pelamar int [pk]
+  id_pelamar int [pk, not null]
   nama varchar(100)
   email varchar(100)
   no_hp varchar(15)
   cv varchar(255)
 }
 
+Table lamaran {
+  id_lamaran int [pk, not null]
+  id_pelamar int [note: 'FK ditandai pada diagram sumber']
+  id_lowongan int [note: 'FK ditandai pada diagram sumber']
+  tanggal_lamaran date
+  status varchar(20)
+}
+
 Table training {
-  id_training int [pk]
+  id_training int [pk, not null]
   id_pelamar int [note: 'FK ditandai pada diagram sumber']
   tanggal_training date
   hasil varchar(20)
 }
 
+Table karyawan {
+  id_karyawan int [pk, not null]
+  id_pelamar int [note: 'FK ditandai pada diagram sumber']
+  nama varchar(100)
+  jabatan varchar(100)
+  tanggal_masuk date
+}
+
 Table seleksi {
-  id_seleksi int [pk]
+  id_seleksi int [pk, not null]
   id_lamaran int [note: 'FK ditandai pada diagram sumber']
   tanggal_seleksi date
   hasil varchar(20)
 }
 
 Table evaluasi {
-  id_evaluasi int [pk]
+  id_evaluasi int [pk, not null]
   id_karyawan int [note: 'FK ditandai pada diagram sumber']
   tanggal_evaluasi date
   hasil text
 }
 
 Table promosi {
-  id_promosi int [pk]
+  id_promosi int [pk, not null]
   id_karyawan int [note: 'FK ditandai pada diagram sumber']
   jabatan_lama varchar(100)
   jabatan_baru varchar(100)
@@ -55,14 +63,14 @@ Table promosi {
 }
 
 Table gaji {
-  id_gaji int [pk]
+  id_gaji int [pk, not null]
   id_karyawan int [note: 'FK ditandai pada diagram sumber']
   nominal decimal
   periode varchar
 }
 
 Table cuti {
-  id_cuti int [pk]
+  id_cuti int [pk, not null]
   id_karyawan int [note: 'FK ditandai pada diagram sumber']
   jenis_cuti varchar(30)
   tanggal_mulai date
@@ -71,14 +79,6 @@ Table cuti {
   status text
   id_manager int [note: 'FK ditandai pada diagram sumber']
   tanggal_keputusan date
-}
-
-Table karyawan {
-  id_karyawan int [pk]
-  id_pelamar int [note: 'FK ditandai pada diagram sumber']
-  nama varchar(100)
-  jabatan varchar(100)
-  tanggal_masuk date
 }
 
 // Relasi berdasarkan kolom FK pada diagram.
